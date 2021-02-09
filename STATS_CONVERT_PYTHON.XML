@@ -1,0 +1,18 @@
+<!-- ***************************************************************** -->
+<!--                                                                   -->
+<!-- Licensed Materials - Property of IBM                              -->
+<!--                                                                   -->
+<!-- IBM SPSS Products: Statistics Common                              -->
+<!--                                                          -->
+<!-- (C) Copyright Jon K Peck 2020                                -->
+<!-- ***************************************************************** -->
+<Command xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extension-1.0.xsd" Name="STATS CONVERT PYTHON" Language="Python" LanguageVersion="3">
+	<Subcommand Name="" IsArbitrary="False" Occurrence="Optional">
+		<Parameter Name="FILES" ParameterType="QuotedString"/>
+		<Parameter Name="OUTPUTLOC" ParameterType="QuotedString"/>
+		<Parameter Name="OVERWRITE" ParameterType="Keyword"/>
+		<Parameter Name="COPYALL" ParameterType="Keyword"/>
+		<Parameter Name="INCLUDESUBS" ParameterType="Keyword"/>
+	</Subcommand>
+	<Subcommand Name="HELP" Occurrence="Optional"/>
+</Command>

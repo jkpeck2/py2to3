@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>STATS CONVERT PYTHON</title>
+
+<link rel="stylesheet" type="text/css" href="extsyntax.css" />
+
+</head>
+
+<body>
+<h1>STATS CONVERT PYTHON</h1>
+
+<p>Convert SPSS syntax files that contain BEGIN PROGRAM blocks of Python 2 code or Python 2 files to Python 3</p>
+<div class="syntax">
+<p>STATS CONVERT PYTHON
+FILES=<em>file specifications</em><sup>&#42;</sup><br/>
+OUTPUTLOC="<em>directory for output</em>"<sup>&#42;</sup><br/>
+INCLUDESUBS=<em>yes or no<sup>&#42;&#42;</sup></em><sup><br/>
+COPYALL=<em>yes or no<sup>&#42;&#42;</sup></em><br/>
+OVERWRITE=<em>yes or no<sup>&#42;&#42;</sup></em>
+
+<p>[/HELP]</p>
+
+<p><sup>&#42;</sup> Required<br/>
+<sup>&#42;&#42;</sup> Default</p>
+</div>
+<p>/HELP displays this help and does nothing else.</p>
+
+
+<pre class="example"><code>
+STATS CONVERT PYTHON
+FILES=&quot;C:/code/mycode.sps&quot; OUTPUTLOC="C:/convertedcode".
+</code></pre>
+
+<pre class="example"><code>
+STATS CONVERT PYTHON
+FILES=&quot;C:/code/**&quot; OUTPUTLOC="C:/convertedcode".
+</code></pre>
+
+<p>The command accepts a file, or a wildcard file expression
+of Statistics syntax and/or Python code and converts any Python 2 code to Python 3.
+For syntax files, it extracts BEGIN PROGRAM PYTHON, BEGIN PROGRAM PYTHON2, or BEGIN PROGRAM blocks,
+converts them to Python 3, and reinserts the converted code in place of the extracted
+code.  It updates the block start to BEGIN PROGRAM PYTHON3.</p>
+
+<p><strong>FILES</strong> specifies the files to convert.  It can be a 
+plain file name with an sps extension or a Python file with a .py extension
+ or a file wildcard expression such as "c:/code/*.sps".
+<p>Any files with other exensions are ignored, so *.* would process only .py and .sps files.</p>
+<p>If the Python 2 code has errors in it, the conversion will fail.  Occasionally
+the code conversion will be incomplete, and notes to that effect are displayed if detected.
+Note, however, that while conversions will be syntactically correct, they are not guaranteed
+to be perfectly accurate.  As an example, x/y in Python 2 does integer division if the
+terms are integers while
+in Python 3, the operation is float division.  The / would need to be changed to //
+to preserve the intent, but the converter cannot do this.</p>
+<p><strong>OUTPUTLOC</strong> specifies the location where the converted files
+should be written.  If the location does not already exist, it will be created.  Output files
+have the same subdirectory structure as the inputs but with the head of the input directory
+specification replaced with the OUTPUTLOC specification.</p>
+<p><strong>INCLUDESUBS</strong> If ** is used in the file expression, the search for input
+files will recurse through subdirectories if INCLUDESUBS is yes.  For example, FILES="c:/code/**/*.py" would process
+code and all its subdirectories for Python files.  FILES="c:/code/**" would process both Python and
+syntax files.</p>
+<p><strong>COPYALL</strong> specifies whether files that are not changed by conversion either because
+the Python is already valid Python 3 or the syntax file does not contain any Python 2 blocks are copied.</p>
+<p><strong>OVERWRITE</strong> specifies whether files in the target locations are overwritten
+or not, if possible.</p>
+
+<p> The actual conversions are done by the Python lib2to3 module that is part of the
+Python standard library.</p>
+
+<p>An additional log file named conversionMessages.txt is written to the output location root.</p>
+
+
+<p>&copy; Copyright(C) Jon K. Peck, 2021</p>
+
+</body>
+
+</html>
+
