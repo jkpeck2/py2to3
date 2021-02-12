@@ -3,7 +3,8 @@
 
 # History
 # 06-14-2020  Original version
-# 01-15-2020  Improve error handling and reporting.  Work around api problem.
+# 01-15-2021  Improve error handling and reporting.  Work around api problem.
+# 02-11-2021  Create output directory if needed
 
 import glob, os, tempfile, re, shutil
 from lib2to3.main import main as converter
@@ -18,13 +19,13 @@ endprogpat = r"end *program *\."
 
 # debugging
     # makes debug apply only to the current thread
-try:
-    import wingdbstub
-    import threading
-    wingdbstub.Ensure()
-    wingdbstub.debugger.SetDebugThreads({threading.get_ident(): 1})
-except:
-    pass
+#try:
+    #import wingdbstub
+    #import threading
+    #wingdbstub.Ensure()
+    #wingdbstub.debugger.SetDebugThreads({threading.get_ident(): 1})
+#except:
+    #pass
 
 def fq(s):
     """return s with backquotes converted to /"""
@@ -53,6 +54,8 @@ def convert(filespec, outputloc, recursive=False, copyall=False, overwrite=False
     fh = spssaux.FileHandles()
     outputloc = fh.resolve(outputloc)
     filespec = fh.resolve(filespec)
+    if not os.path.isdir(outputloc):
+        os.mkdir(outputloc)
     
     ###os.makedirs(outputloc, exist_ok=True)  # raises exception if not possible
     # the lib2to3 conversion code and the SPSS print output functions interfere
