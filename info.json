@@ -1,0 +1,8 @@
+{
+ "type": [ "Extension" ],
+"provider": [ "Community" ],
+"software": [ "SPSS Statistics" ],
+"language": [ "Python 3" ],
+"category": [ "Utility" ],
+"promotion": [ "No" ] 
+}
