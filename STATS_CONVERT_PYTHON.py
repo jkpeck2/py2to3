@@ -11,7 +11,7 @@ from lib2to3.main import main as converter
 # Need versions for V27
 from extension import Template, Syntax, processcmd
 import spss, spssaux
-import logging
+import logging, threading
 
 
 beginprogpat = r"begin +program *\.|begin +program +python *\."
